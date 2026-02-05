@@ -41,7 +41,7 @@ const showWinner = (winnerMsg, winChoice, loserChoice) => {
 }
 
 /*
-1. Invoke the playRound() function in loop for 5 times;
+1. Invoke the playRound() function in a loop 5 times;
 2. Choose a winner depending on scores;
 */
 
@@ -92,10 +92,10 @@ while(roundsCount){
     playRound(getComputerChoice(), getHumanChoice());
 }
 
-let winnerMsg = humanScore === computerScore ? `The game enden in draw. Scores: ${humanScore} = ${computerScore}` : 
-humanScore > computerScore ? `You win! Your score is ${humanScore}.` : `You lose! Youre score is ${computerScore}`;
+let winnerMsg = humanScore === computerScore ? `The game ended in draw. Scores: ${humanScore} = ${computerScore}` : 
+humanScore > computerScore ? `You win! Your score is ${humanScore}.` : `You lose! Your score is ${humanScore}`;
 
 console.log(winnerMsg);
 }
 
-playGame()
+playGame();
