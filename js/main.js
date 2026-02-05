@@ -6,9 +6,23 @@
 
 const getComputerChoice = () => {
     const choiseIndex = Math.floor(Math.random() * 3);
-    const computerChoices = ['Rock', 'Paper', 'Scissors'];
+    const computerChoices = ['rock', 'paper', 'scissors'];
 
     return computerChoices[choiseIndex];
 }
 
-getComputerChoice();
+/*
+1. Ask the user for a valid input;
+2. Check whether his input is within the array ['Rock', 'Paper', 'Scissors'];
+3. IF the input is valid return it;
+4. ELSE return 'your input is invalid';
+*/
+
+const getHumanChoice = () => {
+    const humanChoice = prompt('Please, input your next move...').toLowerCase();
+    const choices = ['rock', 'paper', 'scissors'];
+
+    return choices.some((val) => val === humanChoice) ? humanChoice : 'your input is invalid';
+}
+
+console.log(getHumanChoice());
