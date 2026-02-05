@@ -1,6 +1,3 @@
-let humanScore = 0;
-let computerScore = 0;
-
 /*
 1. Randomly get a number 0, 1, 2;
 2. Map the random number to the corresponding game move (Rock, Paper, or Scissors);
@@ -43,39 +40,62 @@ const showWinner = (winnerMsg, winChoice, loserChoice) => {
     return `${winnerMsg} ${capitalizeFirstLetter(winChoice)} beats ${capitalizeFirstLetter(loserChoice)}.`;
 }
 
-const checkWinner = (computerChoice, humanChoice, choiceToCompare) => {
-    let winnerIndex = 0;
-    const roundMessages = ['You lose!', 'You win!'];
-    winnerIndex = humanChoice === choiceToCompare ? 1 : 0;
-    if(winnerIndex === 0) {
-        computerScore += 1;
-        return showWinner(roundMessages[winnerIndex], computerChoice, humanChoice);
-    } else {
-        humanScore += 1;
-        return showWinner(roundMessages[winnerIndex], humanChoice, computerChoice);
-    }
-}
+/*
+1. Invoke the playRound() function in loop for 5 times;
+2. Choose a winner depending on scores;
+*/
 
-const playRound = (computerChoice, humanChoice) => {
-    let roundMessage = '';
-    if(computerChoice === humanChoice) {
-        console.log('The round ended in draw');
-        return;
-    } else{
-        switch(computerChoice) {
-            case 'rock':
-                roundMessage = checkWinner(computerChoice, humanChoice, 'paper');
-                break;
-            case 'paper':
-                roundMessage = checkWinner(computerChoice, humanChoice, 'scissors');
-                break;
-            case 'scissors':
-                roundMessage = checkWinner(computerChoice, humanChoice, 'rock');
-                break;     
-                
+
+const playGame = () => {
+    let humanScore = 0;
+    let computerScore = 0;
+    let roundsCount = 5;
+
+    const checkWinner = (computerChoice, humanChoice, choiceToCompare) => {
+        let winnerIndex = 0;
+        const roundMessages = ['You lose!', 'You win!'];
+        winnerIndex = humanChoice === choiceToCompare ? 1 : 0;
+        if(winnerIndex === 0) {
+            computerScore += 1;
+            return showWinner(roundMessages[winnerIndex], computerChoice, humanChoice);
+        } else {
+            humanScore += 1;
+            return showWinner(roundMessages[winnerIndex], humanChoice, computerChoice);
         }
-        console.log(roundMessage);
     }
+
+    const playRound = (computerChoice, humanChoice) => {
+        let roundMessage = '';
+        if(computerChoice === humanChoice) {
+            console.log('The round ended in draw');
+            return;
+        } else{
+            switch(computerChoice) {
+                case 'rock':
+                    roundMessage = checkWinner(computerChoice, humanChoice, 'paper');
+                    break;
+                case 'paper':
+                    roundMessage = checkWinner(computerChoice, humanChoice, 'scissors');
+                    break;
+                case 'scissors':
+                    roundMessage = checkWinner(computerChoice, humanChoice, 'rock');
+                    break;     
+                    
+            }
+            console.log(roundMessage);
+        }
+    }
+
+while(roundsCount){
+    roundsCount -= 1;
+
+    playRound(getComputerChoice(), getHumanChoice());
 }
 
-playRound(getComputerChoice(), getHumanChoice());
+let winnerMsg = humanScore === computerScore ? `The game enden in draw. Scores: ${humanScore} = ${computerScore}` : 
+humanScore > computerScore ? `You win! Your score is ${humanScore}.` : `You lose! Youre score is ${computerScore}`;
+
+console.log(winnerMsg);
+}
+
+playGame()
