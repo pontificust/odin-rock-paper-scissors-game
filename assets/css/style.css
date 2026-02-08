@@ -1,0 +1,14 @@
+:root {
+    --color-background-main: #1a0b2e;
+    --color-scoreboard-frames: #2c2c2e;
+    --color-battle-arena: #0a0a0a;
+    --color-rock-top: #e63946;
+    --color-rock-bottom: #9b2226;
+    --color-paper-top: #3a86ff;
+    --color-paper-bottom: #023e8a;
+    --color-scissors-top: #ffbe0b;
+    --color-scissors-bottom: #fb5607;
+    --color-player-cyan: #00f2ff;
+    --color-cpu-amber: #ffcc33;
+    --color-button-text: #ffffff;
+}

@@ -22,7 +22,8 @@ const getHumanChoice = () => {
     const humanChoice = prompt('Please, input your next move...').toLowerCase();
     const choices = ['rock', 'paper', 'scissors'];
 
-    return choices.some((val) => val === humanChoice) ? humanChoice : 'your input is invalid';
+    return choices.some((val) => val === humanChoice) ? humanChoice 
+    : 'your input is invalid';
 }
 
 /*
@@ -37,7 +38,8 @@ const capitalizeFirstLetter = (str) => {
 }
 
 const showWinner = (winnerMsg, winChoice, loserChoice) => {
-    return `${winnerMsg} ${capitalizeFirstLetter(winChoice)} beats ${capitalizeFirstLetter(loserChoice)}.`;
+    return `${winnerMsg} ${capitalizeFirstLetter(winChoice)} 
+    beats ${capitalizeFirstLetter(loserChoice)}.`;
 }
 
 /*
@@ -57,10 +59,12 @@ const playGame = () => {
         winnerIndex = humanChoice === choiceToCompare ? 1 : 0;
         if(winnerIndex === 0) {
             computerScore += 1;
-            return showWinner(roundMessages[winnerIndex], computerChoice, humanChoice);
+            return showWinner(roundMessages[winnerIndex], 
+                computerChoice, humanChoice);
         } else {
             humanScore += 1;
-            return showWinner(roundMessages[winnerIndex], humanChoice, computerChoice);
+            return showWinner(roundMessages[winnerIndex], 
+                humanChoice, computerChoice);
         }
     }
 
