@@ -602,3 +602,52 @@ gap: 40px;
 }
 
 /* The battle-area styles end*/
+
+
+/* The footer-controls styles start*/
+
+.footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer__controls {
+    width: 50%;
+    color: var(--color-button-text);
+    font: 3rem 'Press Start 2P', sans-serif;
+    list-style: none;
+    display: flex;
+    gap: 40px;
+}
+
+.footer__constrol {
+    flex: auto;
+}
+
+.footer__control-button{
+    width: 100%;
+
+    padding: 30px;
+    border: 0;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.footer__control-button.rock {
+    background-color: var(--color-rock-top);
+    box-shadow: 0 25px var(--color-rock-bottom);
+}
+
+.footer__control-button.paper {
+    background-color: var(--color-paper-top);
+    box-shadow: 0 25px var(--color-paper-bottom);
+}
+
+.footer__control-button.scissors {
+    background-color: var(--color-scissors-top);
+    box-shadow: 0 25px var(--color-scissors-bottom);
+}
+
+/* The footer-controls styles end*/
