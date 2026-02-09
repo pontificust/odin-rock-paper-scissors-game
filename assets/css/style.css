@@ -509,4 +509,10 @@ body {
 
 /* The header styles start*/
 
+.header {
+    color: var(--color-button-text);
+    font: 700 4.8rem "Press Start 2P", sans-serif;
+    text-align: center;
+}
+
 /* The header styles end*/
