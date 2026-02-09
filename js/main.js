@@ -102,4 +102,4 @@ humanScore > computerScore ? `You win! Your score is ${humanScore}.` : `You lose
 console.log(winnerMsg);
 }
 
-playGame();
+// playGame();
