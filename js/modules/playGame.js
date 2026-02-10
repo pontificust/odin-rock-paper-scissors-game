@@ -5,7 +5,6 @@ export const playGame = () => {
     const buttonContainer = document.querySelector('.footer__controls');
     const humanScoreElem = document.querySelector('.battle-area__player-score');
     const computerScoreElem = document.querySelector('.battle-area__player-score.computer');
-    const winMsg = document.querySelector('.win-message');
     const humanArena = document.querySelector('.battle-area__arena-human');
     const computerArena = document.querySelector('.battle-area__arena-computer');
 
