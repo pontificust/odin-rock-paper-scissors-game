@@ -1,12 +1,30 @@
 export const playGame = () => {
     let humanScore = 0;
     let computerScore = 0;
-    let roundsCount = 5;
+    let currentChoicesIds = [];
     const buttonContainer = document.querySelector('.footer__controls');
-    const buttons = document.querySelectorAll('.footer__control-button');
+    const humanScoreElem = document.querySelector('.battle-area__player-score');
+    const computerScoreElem = document.querySelector('.battle-area__player-score.computer');
+    const winMsg = document.querySelector('.win-message');
+    const humanArena = document.querySelector('.battle-area__arena-human');
+    const computerArena = document.querySelector('.battle-area__arena-computer');
 
-    const showChoice = () => {
+    const showChoice = (choiceImgId) => {
+        const choiceImg = document.querySelector(choiceImgId);
 
+        choiceImg.classList.add('show');
+    }
+
+    const clearChoice = () => {
+        const humanChoiceImg = document.querySelector(currentChoicesIds[0]);
+        const computerChoiceImg = document.querySelector(currentChoicesIds[1]);
+        humanChoiceImg.classList.remove('show');
+        computerChoiceImg.classList.remove('show');
+    }
+
+    const updateScores = () => {
+        computerScoreElem.textContent = `${computerScore}`;
+        humanScoreElem.textContent = `${humanScore}`;
     }
 
     /*
@@ -18,8 +36,9 @@ export const playGame = () => {
     const getComputerChoice = () => {
         const choiseIndex = Math.floor(Math.random() * 3);
         const computerChoices = ['rock', 'paper', 'scissors'];
+        currentChoicesIds[1] = `#computer-${computerChoices[choiseIndex]}`;
 
-        showChoice(computerChoices[choiseIndex]);
+        showChoice(currentChoicesIds[1]);
 
         return computerChoices[choiseIndex];
     }
@@ -33,74 +52,67 @@ export const playGame = () => {
 
     const getHumanChoice = (e) => {
         const choiceId = e.target.id;
-        const choices = ['rock', 'paper', 'scissors'];
+        const humanChoices = ['rock', 'paper', 'scissors'];
 
         if (choiceId) {
-            showChoice(choices[choiceId]);
-            playRound(getComputerChoice(), choices[choiceId]);
-            console.log(choiceId)
+
+            if (currentChoicesIds[0]) clearChoice();
+            currentChoicesIds[0] = `#human-${humanChoices[choiceId]}`;
+            showChoice(currentChoicesIds[0]);
+            playRound(getComputerChoice(), humanChoices[choiceId]);
         }
     }
 
-    const showWinner = (winnerMsg, winChoice, loserChoice) => {
-        const capitalizeFirstLetter = (str) => {
-            return str.toUpperCase()[0] + str.slice(1);
-        }
-
-        return `${winnerMsg} ${capitalizeFirstLetter(winChoice)} 
-        beats ${capitalizeFirstLetter(loserChoice)}.`;
+    const showWinner = (e) => {
+        clearChoice();
+        let humanArenaMsg = document.createElement('p');
+        let computerArenaMsg = document.createElement('p');
+        humanArenaMsg.textContent = humanScore === computerScore ? `It's a` : 'You';
+        computerArenaMsg.textContent = humanScore === computerScore ? 'draw!' : 
+        humanScore > computerScore ? 'win!' : 'lose!';
+        humanArena.appendChild(humanArenaMsg);
+        computerArena.appendChild(computerArenaMsg);
+        humanScore = 0;
+        computerScore = 0;
+        buttonContainer.removeEventListener('click', getHumanChoice);
+        setTimeout(() => {
+            updateScores();
+            buttonContainer.addEventListener('click', getHumanChoice);
+            humanArena.removeChild(humanArenaMsg);
+            computerArena.removeChild(computerArenaMsg);
+        }, 5000);
     }
 
     const playRound = (computerChoice, humanChoice) => {
-        let roundMessage = '';
-
         let event = new CustomEvent('win');
 
-        const checkWinner = (computerChoice, humanChoice, choiceToCompare) => {
-            let winnerIndex = 0;
-            const roundMessages = ['You lose!', 'You win!'];
-            winnerIndex = humanChoice === choiceToCompare ? 1 : 0;
-            if (winnerIndex === 0) {
-                computerScore += 1;
-            } else {
-                humanScore += 1;
+        const checkWinner = (computerChoice, humanChoice) => {
+            const roundChoices = {
+                rock: 'scissors',
+                paper: 'rock',
+                scissors: 'paper',
             }
+            if (roundChoices[humanChoice] !== computerChoice) {
+                computerScore += 100;
+            } else {
+                humanScore += 100;
+            }
+            updateScores();
 
-            if (computerScore === 5 || humanScore === 5) {
+            if (computerScore === 500 || humanScore === 500) {
                 document.dispatchEvent(event);
             }
-            return showWinner(roundMessages[winnerIndex],
-                humanChoice, computerChoice);
         }
 
         if (computerChoice === humanChoice) {
             console.log('The round ended in draw');
             return;
         } else {
-            switch (computerChoice) {
-                case 'rock':
-                    roundMessage = checkWinner(computerChoice, humanChoice, 'paper');
-                    break;
-                case 'paper':
-                    roundMessage = checkWinner(computerChoice, humanChoice, 'scissors');
-                    break;
-                case 'scissors':
-                    roundMessage = checkWinner(computerChoice, humanChoice, 'rock');
-                    break;
-
-            }
-            console.log(roundMessage);
+            checkWinner(computerChoice, humanChoice);
         }
     }
 
-    while (roundsCount) {
-        roundsCount -= 1;
 
-    }
-
-    let winnerMsg = humanScore === computerScore ? `The game ended in draw. Scores: ${humanScore} = ${computerScore}` :
-        humanScore > computerScore ? `You win! Your score is ${humanScore}.` : `You lose! Your score is ${humanScore}`;
-
-    buttonContainer.addEventListener('click', getHumanChoice);
-    document.addEventListener('win', showWinner);
+buttonContainer.addEventListener('click', getHumanChoice);
+document.addEventListener('win', showWinner);
 }
