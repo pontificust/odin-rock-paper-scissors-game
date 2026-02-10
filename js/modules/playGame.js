@@ -67,8 +67,8 @@ export const playGame = () => {
         let humanArenaMsg = document.createElement('p');
         let computerArenaMsg = document.createElement('p');
         humanArenaMsg.textContent = humanScore === computerScore ? `It's a` : 'You';
-        computerArenaMsg.textContent = humanScore === computerScore ? 'draw!' : 
-        humanScore > computerScore ? 'win!' : 'lose!';
+        computerArenaMsg.textContent = humanScore === computerScore ? 'draw!' :
+            humanScore > computerScore ? 'win!' : 'lose!';
         humanArena.appendChild(humanArenaMsg);
         computerArena.appendChild(computerArenaMsg);
         humanScore = 0;
@@ -112,6 +112,6 @@ export const playGame = () => {
     }
 
 
-buttonContainer.addEventListener('click', getHumanChoice);
-document.addEventListener('win', showWinner);
+    buttonContainer.addEventListener('click', getHumanChoice);
+    document.addEventListener('win', showWinner);
 }
