@@ -570,11 +570,21 @@ gap: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .battle-area__arena-img {
     max-width: 70%;
     max-height: 70%;
+    visibility: hidden;
+    position: absolute;
+    left: -400px;
+    transition: left 0.5s linear;
+}
+
+.show {
+  visibility: visible;
+  left: 0;
 }
 
 .battle-area__player-title,
@@ -614,30 +624,32 @@ gap: 40px;
 }
 
 .footer__controls {
-    width: 50%;
-    color: var(--color-button-text);
+    width: 980px;
     font: 3rem 'Press Start 2P', sans-serif;
     list-style: none;
     display: flex;
+    flex-wrap: wrap;
     gap: 40px;
 }
 
-.footer__constrol {
-    flex: auto;
+.footer__control {
+    flex: 1 1 300px;
 }
 
 .footer__control-button{
+    color: var(--color-button-text);
     width: 100%;
-
     padding: 30px;
     border: 0;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 30px;
     cursor: pointer;
 }
 
 .footer__control-button.rock {
     background-color: var(--color-rock-top);
-    box-shadow: 0 25px var(--color-rock-bottom);
+    box-shadow: 
+    0 25px var(--color-rock-bottom);
 }
 
 .footer__control-button.paper {
